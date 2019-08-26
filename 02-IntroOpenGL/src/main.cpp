@@ -21,6 +21,7 @@ int lastMousePosX;
 int lastMousePosY;
 
 double deltaTime;
+int figure_code;
 
 // Se definen todos las funciones.
 void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes);
@@ -33,6 +34,7 @@ bool processInput(bool continueApplication = true);
 
 GLint vertexShaderID, fragmentShaderID, shaderProgramID;
 GLuint VAO, VBO;
+GLuint VAO2, VBO2;
 
 typedef struct _Vertex {
 	float m_Pos[3];
@@ -58,7 +60,7 @@ const GLchar * fragmentShaderSource = "#version 330 core\n"
 
 // Implementacion de todas las funciones.
 void init(int width, int height, std::string strTitle, bool bFullScreen) {
-	
+
 	if (!glfwInit()) {
 		std::cerr << "Failed to initialize GLFW" << std::endl;
 		exit(-1);
@@ -118,7 +120,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	GLchar infoLog[512];
 	// Se obtiene el estatus de la compilacion del vertex shader
 	glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &success);
-	if(!success){
+	if (!success) {
 		// En caso de error se obtiene el error y lanza mensaje con error
 		glGetShaderInfoLog(vertexShaderID, 512, NULL, infoLog);
 		std::cout << "Error al compilar el VERTEX_SHADER." << infoLog << std::endl;
@@ -134,7 +136,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &success);
 	if (!success) {
 		//En caso de error se obtiene el error y lanza mensaje con error
-		 glGetShaderInfoLog(fragmentShaderID, 512, NULL, infoLog);
+		glGetShaderInfoLog(fragmentShaderID, 512, NULL, infoLog);
 		std::cout << "Error al compilar el FRAGMENT_SHADER." << infoLog << std::endl;
 	}
 
@@ -147,7 +149,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	glLinkProgram(shaderProgramID);
 	// Revision de error de linkeo del programa
 	glGetProgramiv(shaderProgramID, GL_LINK_STATUS, &success);
-	if(!success){
+	if (!success) {
 		glGetProgramInfoLog(shaderProgramID, 512, NULL, infoLog);
 		std::cout << "ERROR al linkear el programa." << infoLog << std::endl;
 	}
@@ -165,7 +167,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		{{-0.5f, 0.5f, 0.0f}, {1.0f, 0.0f, 1.0f}}
 	};*/
 
-	Vertex vertices[] =
+	Vertex vertices_estrella[] =
 	{
 		{ {0.0, 0.0, 0.0}, { 0.2, 0.3, 0.5 }},
 		{ {0.2, 0.7, 0.0}, { 0.5, 0.3, 0.7 }},
@@ -191,7 +193,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		{ {0.7, -0.2, 0.0}, { 0.5, 0.3, 0.7 }},
 		{ {0.7, 0.0, 0.0}, { 0.2, 0.4, 0.1 }},
 		{ {0.0, 0.0, 0.0}, { 0.4, 0.1, 0.8 }},
-		{ { 0.0,0.0,0.0}, { 0.2, 0.3, 0.5 }}, //a
+		{ { 0.0,0.0,0.0}, { 0.2, 0.3, 0.5 }},
 		{ { -0.7,0.2, 0.0}, { 0.5, 0.3, 0.7 }},
 		{ { -0.7,0.0, 0.0}, { 0.2, 0.4, 0.1 }},
 		{ { -0.7,0.0, 0.0}, { 0.6, 0.6, 0.45 }},
@@ -217,10 +219,95 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		{ {0.0, -0.0, 0.0}, { 0.4, 0.1, 0.8 }}
 	};
 
-	size_t bufferSize = sizeof(vertices);
-	size_t vertexSize = sizeof(vertices[0]);
-	size_t rgbOffset = sizeof(vertices[0].m_Pos);
-	
+	Vertex vertices_casa[] =
+	{
+		{ {-0.5, -0.65, 0.0}, { 1.0, 1.0, 1.0 }},//cuarto
+		{ {0.5, -0.65, 0.0}, { 1.0, 1.0, 1.0 }},
+		{ {0.5, 0.25, 0.0}, { 1.0, 1.0, 1.0 }},
+		{ {0.5, 0.25, 0.0}, { 1.0, 1.0, 1.0 }},
+		{ {-0.5, 0.25, 0.0}, { 1.0, 1.0, 1.0 }},
+		{ {-0.5,-0.65, 0.0}, { 1.0, 1.0, 1.0 }},
+		{ {-0.4,-0.65, 0.0}, { 0.1, 0.0, 0.0 }},//puertagrande
+		{ {-0.05,-0.65, 0.0}, { 0.1, 0.0, 0.0 }},
+		{ {-0.05, 0.0, 0.0}, { 0.1, 0.0, 0.0 }},
+		{ {-0.05, 0.0, 0.0}, { 0.1, 0.0, 0.0 }},
+		{ {-0.4, 0.0, 0.0}, { 0.1, 0.0, 0.0 }},
+		{ {-0.4,-0.65, 0.0}, { 0.1, 0.0, 0.0 }},
+		{ {-0.35,-0.6, 0.0}, { 1.0, 0.5, 0.0 }},//puertachica
+		{ {-0.1,-0.6, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {-0.1, -0.05, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {-0.1, -0.05, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {-0.35, -0.05, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {-0.35, -0.6, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {0.05, -0.25, 0.0}, { 0.0, 0.7, 0.1 }},//ventanagrande
+		{ {0.4, -0.25, 0.0}, {  0.0, 0.7, 0.1}},
+		{ {0.4, 0.15, 0.0}, {  0.0, 0.7, 0.1 }},
+		{ {0.4, 0.15, 0.0}, {  0.0, 0.7, 0.1 }},
+		{ {0.05, 0.15, 0.0}, {  0.0, 0.7, 0.1 }},
+		{ {0.05, -0.25, 0.0}, {  0.0, 0.7, 0.1 }},
+		{ {0.1, 0.0, 0.0},  { 0.0, 0.5, 0.7 }},//ven1
+		{ {0.35, 0.0, 0.0}, { 0.0, 0.5, 0.7 }},
+		{ {0.35, 0.1, 0.0}, { 0.0, 0.5, 0.7 }},
+		{ {0.35, 0.1, 0.0}, { 0.0, 0.5, 0.7}},
+		{ {0.1, 0.1, 0.0}, {  0.0, 0.5, 0.7}},
+		{ {0.1, 0.0, 0.0}, {  0.0, 0.5, 0.7}},
+		{ {0.1, -0.2, 0.0}, { 0.0, 0.5, 0.7}},//ven2
+		{ {0.2, -0.2, 0.0}, { 0.0, 0.5, 0.7}},
+		{ {0.2, -0.05, 0.0}, {0.0, 0.5, 0.7 }},
+		{ {0.2, -0.05, 0.0}, {0.0, 0.5, 0.7 }},
+		{ {0.1, -0.05, 0.0}, {0.0, 0.5, 0.7 }},
+		{ {0.1, -0.2, 0.0}, { 0.0, 0.5, 0.7 }},
+		{ {0.25, -0.2, 0.0}, { 0.0, 0.5, 0.7}},//ven3
+		{ {0.35, -0.2, 0.0}, { 0.0, 0.5, 0.7}},
+		{ {0.35, -0.05, 0.0}, {0.0, 0.5, 0.7 }},
+		{ {0.35, -0.05, 0.0}, {0.0, 0.5, 0.7 }},
+		{ {0.25, -0.05, 0.0}, {0.0, 0.5, 0.7 }},
+		{ {0.25, -0.2, 0.0}, { 0.0, 0.5, 0.7}},
+		{ {-0.5, 0.25, 0.0}, { 0.8, 0.4, 0.0 }},//cuarto
+		{ {0.5, 0.25, 0.0},	 { 0.8, 0.4, 0.0 }},
+		{ {0.5, 0.35, 0.0},  { 0.8, 0.4, 0.0 }},
+		{ {0.5, 0.35, 0.0},  { 0.8, 0.4, 0.0 }},
+		{ {-0.5, 0.35, 0.0}, { 0.8, 0.4, 0.0 }},
+		{ {-0.5, 0.25, 0.0}, { 0.8, 0.4, 0.0 }},
+		{ {-0.1, 0.5, 0.0}, { 0.0, 0.0, 1.0 }},//venp
+		{ {0.1, 0.5, 0.0}, { 0.0, 0.0, 1.0 }},
+		{ {0.1, 0.7, 0.0}, { 0.0, 0.0, 1.0 }},
+		{ {0.1, 0.7, 0.0}, { 0.0, 0.0, 1.0 }},
+		{ {-0.1, .7, 0.0}, { 0.0, 0.0, 1.0 }},
+		{ {-0.1, 0.55, 0.0}, { 0.0, 0.0, 1.0 }},
+		{ {0.5, 0.35, 0.0}, { 1.0, 0.6, 0.0 }},//pico
+		{ {-0.5, 0.35, 0.0}, {1.0, 0.6, 0.0 }},
+		{ {0.0, 0.75, 0.0}, { 1.0, 0.6, 0.0 }},
+		{ {0.5, 0.35, 0.0}, { 1.0, 0.7, 0.0 }},//chim
+		{ {0.5, 0.75, 0.0}, { 1.0, 0.7, 0.0 }},
+		{ {0.2, 0.63, 0.0}, { 1.0, 0.7, 0.0 }},
+		{ {0.2, 0.63, 0.0}, { 1.0, 0.7, 0.0 }},
+		{ {0.5, .75, 0.0}, { 1.0, 0.7, 0.0 }},
+		{ {0.2, 0.75, 0.0}, { 1.0, 0.7, 0.0 }},
+		{ {0.55, 0.75, 0.0}, { 1.0, 0.5, 0.0 }},//chimc
+		{ {0.15, 0.75, 0.0}, { 1.0, 0.5, 0.0}},
+		{ {0.15, 0.8, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {0.15, 0.8, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {0.55, .8, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {0.55, 0.75, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {-0.58, 0.35, 0.0}, { 1.0, 0.5, 0.0 }},//pico
+		{ {-0.5, .35, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {0.0, 0.85, 0.0}, { 1.0, 0.5, 0.0}},
+		{ {0.0, 0.85, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {0.0, 0.75, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {-0.5, 0.35, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {0.58, 0.35, 0.0}, { 1.0, 0.5, 0.0 }},//pico
+		{ {0.5, .35, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {0.0, 0.85, 0.0}, { 1.0, 0.5, 0.0}},
+		{ {0.0, 0.85, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {0.0, 0.75, 0.0}, { 1.0, 0.5, 0.0 }},
+		{ {0.5, 0.35, 0.0}, { 1.0, 0.5, 0.0 }},
+
+	};
+	size_t bufferSize = sizeof(vertices_estrella);
+	size_t vertexSize = sizeof(vertices_estrella[0]);
+	size_t rgbOffset = sizeof(vertices_estrella[0].m_Pos);
+
 	std::cout << "Vertices:" << std::endl;
 	std::cout << "bufferSize:" << bufferSize << std::endl;
 	std::cout << "vertexSize:" << vertexSize << std::endl;
@@ -241,7 +328,8 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	// Copiamos los datos de los vertices a memoria del procesador grafico
 	//           TIPO DE BUFFER     TAMANIO          DATOS    MODO (No cambian los datos)
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices_estrella), vertices_estrella, GL_STATIC_DRAW);
+	
 
 	// Se crea un indice para el atributo del vertice posicion, debe corresponder al location del atributo del shader
 	// indice del atributo, Cantidad de datos, Tipo de dato, Normalizacion, Tamanio del bloque (Stride), offset
@@ -254,6 +342,20 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Ya que se configuro, se regresa al estado original
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+
+	glGenVertexArrays(1, &VAO2);
+	glBindVertexArray(VAO2);
+	glGenBuffers(1, &VBO2);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO2);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices_casa), vertices_casa, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertexSize, (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, vertexSize, (GLvoid*)rgbOffset);
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+
+
 
 }
 
@@ -281,6 +383,16 @@ void destroy() {
 
 	glBindVertexArray(0);
 	glDeleteVertexArrays(1, &VAO);
+
+	glBindVertexArray(VAO2);
+	glDisableVertexAttribArray(0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO2);
+	glDeleteBuffers(1, &VBO2);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	glBindVertexArray(0);
+	glDeleteVertexArrays(1, &VAO2);
 }
 
 void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes) {
@@ -295,6 +407,13 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 		case GLFW_KEY_ESCAPE:
 			exitApp = true;
 			break;
+		case GLFW_KEY_E:
+			figure_code = 0;
+			break;
+		case GLFW_KEY_C:
+			figure_code = 1;
+			break;
+
 		}
 	}
 }
@@ -335,16 +454,19 @@ void applicationLoop() {
 	while (psi) {
 		psi = processInput(true);
 		glClear(GL_COLOR_BUFFER_BIT);
-
-		// Esta linea esta comentada debido a que de momento no se usan los shaders
 		 glUseProgram(shaderProgramID);
+		 if (figure_code == 1) {
+			glBindVertexArray(VAO);
+			glDrawArrays(GL_TRIANGLES, 0, 48);
+			glBindVertexArray(0);
 
-		// Se indica el buffer de datos y la estructura de estos utilizando solo el id del VAO
-		glBindVertexArray(VAO);
-		// Primitiva de ensamble
-		glDrawArrays(GL_TRIANGLES, 0, 48);
-		glBindVertexArray(0);
+		 }
+		 if(figure_code == 0){
+			 glBindVertexArray(VAO2);
+			 glDrawArrays(GL_TRIANGLES, 0, 81);
+			 glBindVertexArray(0);
 
+		 }
 		glfwSwapBuffers(window);
 	}
 }
