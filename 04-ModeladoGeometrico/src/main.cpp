@@ -37,8 +37,11 @@ Shader shader;
 std::shared_ptr<FirstPersonCamera> camera(new FirstPersonCamera());
 Sphere sphere1(20, 20);
 Sphere sphere2(20, 20);
+Sphere sphere3(20, 20);
 Cylinder cylinder1(20, 20, 0.5, 0.5);
+Cylinder cylinder2(20, 20, 0.5, 0.5);
 Box box1;
+Box box2;
 
 bool exitApp = false;
 int lastMousePosX = 0;
@@ -105,7 +108,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	}
 
 	glViewport(0, 0, screenWidth, screenHeight);
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+	glClearColor(0.85f, 0.89f, 0.94f, 0.0f);
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
@@ -116,7 +119,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	//METODO SETTER QUE COLOCA EL APUNTADOR AL SHADER
 	sphere1.setShader(&shader);
 	//Setter para poner el color a la geometría
-	sphere1.setColor(glm::vec4(0.3, 0.3, 1.0, 1.0));
+	sphere1.setColor(glm::vec4(0.99, 0.9, 0.05, 1.0));
 
 	sphere2.init();
 	//METODO SETTER QUE COLOCA EL APUNTADOR AL SHADER
@@ -124,14 +127,28 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	//Setter para poner el color a la geometría
 	sphere2.setColor(glm::vec4(1.0, 1.0, 1.0, 1.0));
 
+	sphere3.init();
+	//METODO SETTER QUE COLOCA EL APUNTADOR AL SHADER
+	sphere3.setShader(&shader);
+	//Setter para poner el color a la geometría
+	sphere3.setColor(glm::vec4(0.0, 0.0, 1.0, 1.0));
+
 	cylinder1.init();
 	cylinder1.setShader(&shader);
-	cylinder1.setColor(glm::vec4(0.3, 0.3, 1.0, 1.0));
+	cylinder1.setColor(glm::vec4(0.99, 0.9, 0.05, 1.0));
+
+	cylinder2.init();
+	cylinder2.setShader(&shader);
+	cylinder2.setColor(glm::vec4(0.35, 0.15, 0.16, 1.0));
 
 	box1.init();
 	box1.setShader(&shader);
-	box1.setColor(glm::vec4(0.3, 0.3, 1.0, 1.0));
+	box1.setColor(glm::vec4(0.99, 0.9, 0.05, 1.0));
 	camera->setPosition(glm::vec3(2.0, 0.0, 4.0));
+
+	box2.init();
+	box2.setShader(&shader);
+	box2.setColor(glm::vec4(0.35, 0.15, 0.16, 1.0));
 }
 
 void destroy() {
@@ -141,8 +158,14 @@ void destroy() {
 	// Eliminar los shader y buffers creados.
 	//elimina los VAO VBO Y EBO
 	sphere1.destroy();
+	sphere2.destroy();
+	sphere3.destroy();
+
 	cylinder1.destroy();
+	cylinder2.destroy();
+
 	box1.destroy();
+	box2.destroy();
 
 	shader.destroy();
 }
@@ -232,8 +255,8 @@ void applicationLoop() {
 		/*cylinder1.render(model);
 		cylinder1.enableWireMode();
 		*/
-		box1.enableWireMode();
-		box1.render(glm::scale(model, glm::vec3(1.0,1.0,0.1)));
+		//box1.enableWireMode();
+		box1.render(glm::scale(model, glm::vec3(1.0,1.25,0.1)));
 		//articulación
 		glm::mat4 j1 = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f));
 		sphere1.enableWireMode();
@@ -256,13 +279,97 @@ void applicationLoop() {
 
 		//ojo
 		glm::mat4 ojo = glm::translate(model, glm::vec3(0.25f, 0.20f, 0.05f));
-		sphere2.enableWireMode();
+		sphere2.enableFillMode();
 		sphere2.render(glm::scale(ojo, glm::vec3(0.2, 0.2, 0.1)));
+
+		glm::mat4 ojoi = glm::translate(ojo, glm::vec3(0.0f, 0.0f, 0.05f));
+		sphere3.enableFillMode();
+		sphere3.render(glm::scale(ojoi, glm::vec3(0.09, 0.09, 0.1)));
 
 		//ojo2
 		glm::mat4 ojo2 = glm::translate(model, glm::vec3(-0.25f, 0.20f, 0.05f));
-		sphere2.enableWireMode();
+		sphere2.enableFillMode();
 		sphere2.render(glm::scale(ojo2, glm::vec3(0.2, 0.2, 0.1)));
+
+		glm::mat4 ojoi2 = glm::translate(ojo2, glm::vec3(0.0f, 0.0f, 0.05f));
+		sphere3.enableFillMode();
+		sphere3.render(glm::scale(ojoi2, glm::vec3(0.09, 0.09, 0.1)));
+		//articulaciónb2
+		glm::mat4 j3 = glm::translate(model, glm::vec3(-0.5f, 0.0f, 0.0f));
+		sphere1.enableWireMode();
+		sphere1.render(glm::scale(j3, glm::vec3(0.1, 0.1, 0.1)));
+		//brazo2
+		glm::mat4 l3 = glm::translate(j3, glm::vec3(-0.25f, 0.0f, 0.0f));
+		l3 = glm::rotate(l3, glm::radians(90.0f), glm::vec3(0, 0, 1.0));
+		cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(l3, glm::vec3(0.1, 0.5, 0.1)));
+		//art2b2
+		glm::mat4 j4 = glm::translate(j3, glm::vec3(-0.5f, 0.0f, 0.0f));
+		sphere1.enableWireMode();
+		sphere1.render(glm::scale(j4, glm::vec3(0.1, 0.1, 0.1)));
+		//hueso2b2
+
+		glm::mat4 l4 = glm::translate(j4, glm::vec3(-0.25f, 0.0f, 0.0f));
+		l4 = glm::rotate(l4, glm::radians(90.0f), glm::vec3(0, 0, 1.0));
+		cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(l4, glm::vec3(0.1, 0.5, 0.1)));
+
+		//articulaciónp1
+		glm::mat4 ap11 = glm::translate(model, glm::vec3(-0.25f, -0.65f, 0.0f));
+		sphere1.enableWireMode();
+		sphere1.render(glm::scale(ap11, glm::vec3(0.1, 0.1, 0.1)));
+		//hueso1p1
+		glm::mat4 hp11 = glm::translate(ap11, glm::vec3(0.0f, -0.25f, 0.0f));
+		cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(hp11, glm::vec3(0.1, 0.5, 0.1)));
+		//art2p1
+		glm::mat4 ap12 = glm::translate(ap11, glm::vec3(0.0f, -0.5f, 0.0f));
+		sphere1.enableWireMode();
+		sphere1.render(glm::scale(ap12, glm::vec3(0.1, 0.1, 0.1)));
+		//hueso2p1
+
+		glm::mat4 hp12 = glm::translate(ap12, glm::vec3(0.0f, -0.25f, 0.0f));
+		cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(hp12, glm::vec3(0.1, 0.5, 0.1)));
+
+		//articulaciónp2
+		glm::mat4 ap21 = glm::translate(model, glm::vec3(0.25f, -0.65f, 0.0f));
+		sphere1.enableWireMode();
+		sphere1.render(glm::scale(ap21, glm::vec3(0.1, 0.1, 0.1)));
+		//hueso1p2
+		glm::mat4 hp21 = glm::translate(ap21, glm::vec3(0.0f, -0.25f, 0.0f));
+		cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(hp21, glm::vec3(0.1, 0.5, 0.1)));
+		//art2p2
+		glm::mat4 ap22 = glm::translate(ap21, glm::vec3(0.0f, -0.5f, 0.0f));
+		sphere1.enableWireMode();
+		sphere1.render(glm::scale(ap22, glm::vec3(0.1, 0.1, 0.1)));
+		//hueso2p2
+
+		glm::mat4 hp22 = glm::translate(ap22, glm::vec3(0.0f, -0.25f, 0.0f));
+		cylinder1.enableWireMode();
+		cylinder1.render(glm::scale(hp22, glm::vec3(0.1, 0.5, 0.1)));
+
+		glm::mat4 pan = glm::translate(model, glm::vec3(0.0f, -0.45f, 0.05f));
+		box2.enableFillMode();
+		box2.render(glm::scale(pan, glm::vec3(1.0, 0.4,0.1)));
+
+		glm::mat4 pan2 = glm::translate(model, glm::vec3(-0.5f, -0.45f, 0.0f));
+		box2.enableFillMode();
+		box2.render(glm::scale(pan2, glm::vec3(0.05, 0.38, 0.2)));
+
+		glm::mat4 pan3 = glm::translate(model, glm::vec3(0.5f, -0.45f, 0.0f));
+		box2.enableFillMode();
+		box2.render(glm::scale(pan3, glm::vec3(0.05, 0.38, 0.2)));
+
+		glm::mat4 panp1 = glm::translate(model, glm::vec3(-0.25f, -.73f, 0.0f));
+		cylinder2.enableFillMode();
+		cylinder2.render(glm::scale(panp1, glm::vec3(0.25, 0.15, 0.1)));
+
+		glm::mat4 panp2 = glm::translate(model, glm::vec3(0.25f, -.73f, 0.0f));
+		cylinder2.enableFillMode();
+		cylinder2.render(glm::scale(panp2, glm::vec3(0.25, 0.15, 0.1)));
+
 		shader.turnOff();
 
 		glfwSwapBuffers(window);
