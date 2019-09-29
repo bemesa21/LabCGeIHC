@@ -279,8 +279,6 @@ bool processInput(bool continueApplication){
 	//release
 
 
-	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS )
-		sentido = false;
 	if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
 		rot1 += 0.001;
 	else if((glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE))
@@ -578,6 +576,13 @@ void applicationLoop() {
 		cuerpo = glm::rotate(cuerpo, rot23, glm::vec3(0, 1, 0));
 		cylinder3.enableFillMode();
 		cylinder3.render(cuerpo);
+
+		//adornos torso
+		glm::mat4 adornot = glm::translate(cuerpo, glm::vec3(0, .4, .85));
+		box3.render(glm::scale(adornot, glm::vec3(0.25, 0.05, 0.05)));
+
+		glm::mat4 adornot2 = glm::translate(cuerpo, glm::vec3(0, .3, .85));
+		box3.render(glm::scale(adornot2, glm::vec3(0.25, 0.05, 0.05)));
 
 		//cabeza
 		glm::mat4 cabeza = glm::translate(cuerpo, glm::vec3(0, .5, 0));
