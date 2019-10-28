@@ -676,7 +676,7 @@ void applicationLoop() {
 		shaderMulLighting.setVectorFloat3("directionalLight.light.diffuse", glm::value_ptr(glm::vec3(0.7, 0.7, 0.7)));
 		shaderMulLighting.setVectorFloat3("directionalLight.light.specular", glm::value_ptr(glm::vec3(0.9, 0.9, 0.9)));
 		shaderMulLighting.setVectorFloat3("directionalLight.direction", glm::value_ptr(glm::vec3(-1.0, 0.0, 0.0)));
-
+		
 		/*******************************************
 		 * Propiedades SpotLights
 		 *******************************************/
@@ -723,7 +723,7 @@ void applicationLoop() {
 		/*******************************************
 		 * Modelo de Luces dentro de la casa
 		 *******************************************/
-		sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
+		/*sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
 		sphereLamp.setPosition(glm::vec3(-5.1, 4.5, -3.5));
 		sphereLamp.setColor(glm::vec4(0.0, 1.0, 0.0, 1.0));
 		sphereLamp.render();
@@ -736,7 +736,7 @@ void applicationLoop() {
 		sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
 		sphereLamp.setPosition(glm::vec3(-5.1, 4.5, -6.5));
 		sphereLamp.setColor(glm::vec4(0.0, 0.0, 1.0, 1.0));
-		sphereLamp.render();
+		sphereLamp.render();*/
 
 
 		/*******************************************
