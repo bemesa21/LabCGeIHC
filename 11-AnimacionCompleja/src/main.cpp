@@ -89,7 +89,17 @@ Model modelCar;
 Model modelEclipseWheelsFrontal;
 Model modelEclipseWheelsRear;
 
+Model modelRosa;
+Model modelMaceta;
+Model modelJardinera;
 Model modelMueble;
+Model modelSala;
+Model modelSalap;
+Model modelToilet;
+Model modelHandWash;
+Model modelTable;
+Model modelLampara;
+
 Model modelHeliChasis;
 Model modelHeliHeliMeid;
 Model modelHeliHeliCh;
@@ -101,6 +111,9 @@ Model modelLamboRightDoor;
 Model modelLamboFrontWheels;
 Model modelLamboBackWheels;
 
+Model modelTree;
+Model modelStar;
+Model modelSerie;
 
 GLuint textureID1, textureID2, textureID3, textureID4, textureID5, textureID6, textureID7, textureID8, textureID9;
 GLuint textureID10, textureID11, textureID12, textureID13, textureID14, textureID15, textureID16, textureID17;
@@ -324,7 +337,9 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	modelAircraft.loadModel("../models/Aircraft_obj/E 45 Aircraft_obj.obj");
 	modelAircraft.setShader(&shaderMulLighting);*/
 
-	//eclipse car
+	/////////////////////
+	/////eclipse car/////
+	/////////////////////
 	modelCar.loadModel("../models/Eclipse/2003eclipse_chasis.obj");
 	modelCar.setShader(&shaderMulLighting);
 
@@ -334,10 +349,9 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	modelEclipseWheelsRear.loadModel("../models/Eclipse/2003eclipse_rear_wheels.obj");
 	modelEclipseWheelsRear.setShader(&shaderMulLighting);
 
-	modelMueble.loadModel("../models/Wood_Table/\Wood_Table.obj");
-	modelMueble.setShader(&shaderMulLighting);
-
-	//Helicoptero;
+	/////////////////////
+	/////Helicoptero/////
+	/////////////////////
 	modelHeliChasis.loadModel("../models/Helicopter/Mi_24_chasis.obj");
 	modelHeliChasis.setShader(&shaderMulLighting);
 
@@ -346,8 +360,9 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 
 	modelHeliHeliCh.loadModel("../models/Helicopter/Mi_24_heli2.obj");
 	modelHeliHeliCh.setShader(&shaderMulLighting);
-
-	// Lamborginhi
+	/////////////////////
+	/////Lambo car/////
+	/////////////////////
 	modelLambo.loadModel("../models/Lamborginhi_Aventador_OBJ/Lamborghini_Aventador_chasis.obj");
 	modelLambo.setShader(&shaderMulLighting);
 	modelLamboLeftDor.loadModel("../models/Lamborginhi_Aventador_OBJ/Lamborghini_Aventador_left_dor.obj");
@@ -360,8 +375,54 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	modelLamboBackWheels.setShader(&shaderMulLighting);
 
 
+	/////////////////////
+	/////Muebles/////////
+	/////////////////////
+	modelMueble.loadModel("../models/Wood_Table/\Wood_Table.obj");
+	modelMueble.setShader(&shaderMulLighting);
 
-	camera->setPosition(glm::vec3(0.0, 0.0, 20.0));
+	modelTable.loadModel("../models/table/table.obj");
+	modelTable.setShader(&shaderMulLighting);
+
+	modelSala.loadModel("../models/sofa/sofa.obj");
+	modelSala.setShader(&shaderMulLighting);
+
+	modelRosa.loadModel("../models/rosa/rosa.obj");
+	modelRosa.setShader(&shaderMulLighting);
+
+	modelMaceta.loadModel("../models/plantamaceta/plantamaceta.obj");
+	modelMaceta.setShader(&shaderMulLighting);
+
+	modelJardinera.loadModel("../models/jardinera/jardinera.obj");
+	modelJardinera.setShader(&shaderMulLighting);
+
+	modelLampara.loadModel("../models/lampara1/lampara.obj");
+	modelLampara.setShader(&shaderMulLighting);
+
+	modelSalap.loadModel("../models/sofap/sofap.obj");
+	modelSalap.setShader(&shaderMulLighting);
+
+	
+	modelToilet.loadModel("../models/toilet/toilet.obj");
+	modelToilet.setShader(&shaderMulLighting);
+
+	modelHandWash.loadModel("../models/lavamanos/bathroom_vanity.obj");
+	modelHandWash.setShader(&shaderMulLighting);
+
+
+	////////////////////////
+	/////Decoración/////////
+	////////////////////////
+	modelTree.loadModel("../models/christmas_tree/Christmas+tree.obj");
+	modelTree.setShader(&shaderMulLighting);
+
+	modelStar.loadModel("../models/star_obj/gold_star.obj");
+	modelStar.setShader(&shaderMulLighting);
+
+	modelSerie.loadModel("../models/serie/jugando.obj");
+	modelSerie.setShader(&shaderMulLighting);
+
+	camera->setPosition(glm::vec3(5, 0.0, 4));
 
 	// Descomentar
 	// Definimos el tamanio de la imagen
@@ -1106,7 +1167,6 @@ void destroy() {
 	modelEclipseWheelsFrontal.destroy();
 	modelEclipseWheelsRear.destroy();
 
-	modelMueble.destroy();
 	modelHeliChasis.destroy();
 	modelHeliHeliMeid.destroy();
 	modelHeliHeliCh.destroy();
@@ -1116,6 +1176,20 @@ void destroy() {
 	modelLamboRightDoor.destroy();
 	modelLamboBackWheels.destroy();
 	modelLamboFrontWheels.destroy();
+
+	modelMueble.destroy();
+	modelSala.destroy();
+	modelRosa.destroy();
+	modelMaceta.destroy();
+	modelJardinera.destroy();
+	modelLampara.destroy();
+	modelSalap.destroy();
+	modelToilet.destroy();
+	modelTable.destroy();
+	modelHandWash.destroy();
+
+	modelTree.destroy();
+	modelStar.destroy();
 }
 
 void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes) {
@@ -1433,7 +1507,7 @@ void applicationLoop() {
 		shaderMulLighting.setFloat("spotLights[0].quadratic", 0.001);
 
 		// Esto es para la luces pointlights
-		shaderMulLighting.setInt("pointLightCount", 5);
+		shaderMulLighting.setInt("pointLightCount", 6);
 		shaderMulLighting.setVectorFloat3("pointLights[0].position", glm::value_ptr((glm::vec3(-3.1, 1.8, 7.0))));
 		shaderMulLighting.setVectorFloat3("pointLights[0].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
 		shaderMulLighting.setVectorFloat3("pointLights[0].light.diffuse", glm::value_ptr(glm::vec3(0.0, 0.01, 0.0)));
@@ -1475,6 +1549,15 @@ void applicationLoop() {
 		shaderMulLighting.setFloat("pointLights[4].constant", 1.0);
 		shaderMulLighting.setFloat("pointLights[4].linear", offset5);
 		shaderMulLighting.setFloat("pointLights[4].quadratic", 0.004);
+		
+		//luz del baño
+		shaderMulLighting.setVectorFloat3("pointLights[5].position", glm::value_ptr((glm::vec3(-1.0, 1.3, -2.5))));
+		shaderMulLighting.setVectorFloat3("pointLights[5].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+		shaderMulLighting.setVectorFloat3("pointLights[5].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.0)));
+		shaderMulLighting.setVectorFloat3("pointLights[5].light.specular", glm::value_ptr(glm::vec3(0.91, 0.92, 0.85)));
+		shaderMulLighting.setFloat("pointLights[5].constant", 1.0);
+		shaderMulLighting.setFloat("pointLights[5].linear", 0.001);
+		shaderMulLighting.setFloat("pointLights[5].quadratic", 0.004);
 
 		sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
 		sphereLamp.setPosition(glm::vec3(-3.1, 1.8, 6.0));
@@ -2330,17 +2413,88 @@ void applicationLoop() {
 		/////////////MUEBLES/////////////////////
 		///////////////////////////////////////////
 		glm::mat4 matrixModelMueble = glm::mat4(1.0);
-		matrixModelMueble = glm::translate(matrixModelMueble, glm::vec3(2.0, -1.6, 4.0));
-		matrixModelMueble = glm::scale(matrixModelMueble, glm::vec3(0.01, 0.01, 0.01));
+		matrixModelMueble = glm::translate(matrixModelMueble, glm::vec3(1.0, -1.6, 3.0));
+		matrixModelMueble = glm::scale(matrixModelMueble, glm::vec3(1.5, 1.5, 1.5));
 		modelMueble.render(matrixModelMueble);
 		glActiveTexture(GL_TEXTURE0);
-		//renderizado nave
 
-		/*modelAircraft.render(matrixModelAircraft);
+		glm::mat4 matrixModelTable = glm::mat4(1.0);
+		matrixModelTable = glm::translate(matrixModelTable, glm::vec3(2.5, -1.6, -2.5));
+		matrixModelTable = glm::scale(matrixModelTable, glm::vec3(2, 2, 2));
+		modelTable.render(matrixModelTable);
 		glActiveTexture(GL_TEXTURE0);
-		//renderizado nave*/
 
+		glm::mat4 matrixModelRosa = glm::mat4(1.0);
+		matrixModelRosa = glm::translate(matrixModelRosa, glm::vec3(1.0, -1.0, 3.0));
+		matrixModelRosa = glm::scale(matrixModelRosa, glm::vec3(0.3, 0.3, 0.3));
+		modelRosa.render(matrixModelRosa);
+		glActiveTexture(GL_TEXTURE0);
 
+		glm::mat4 matrixModelMaceta = glm::mat4(1.0);
+		matrixModelMaceta = glm::translate(matrixModelMaceta, glm::vec3(1.0, -1.6, 6.8));
+		matrixModelMaceta = glm::rotate(matrixModelMaceta, glm::radians(90.0f), glm::vec3(0, 1, 0));
+		matrixModelMaceta = glm::scale(matrixModelMaceta, glm::vec3(0.2, 0.2, 0.2));
+		modelMaceta.render(matrixModelMaceta);
+		glActiveTexture(GL_TEXTURE0);
+
+		glm::mat4 matrixModelJardinera = glm::mat4(1.0);
+		matrixModelJardinera = glm::translate(matrixModelJardinera, glm::vec3(10.0, -1.6, 8));
+		matrixModelJardinera = glm::rotate(matrixModelJardinera, glm::radians(90.0f), glm::vec3(0, 1, 0));
+		matrixModelJardinera = glm::scale(matrixModelJardinera, glm::vec3(0.3, 0.3, 0.3));
+		modelJardinera.render(matrixModelJardinera);
+		glActiveTexture(GL_TEXTURE0);
+
+		glm::mat4 matrixModelSala= glm::mat4(1.0);
+		matrixModelSala = glm::translate(matrixModelSala, glm::vec3(1.0, -1.0, 5.0));
+		matrixModelSala = glm::rotate(matrixModelSala, glm::radians(180.0f), glm::vec3(0, 1, 0));
+		matrixModelSala = glm::scale(matrixModelSala, glm::vec3(0.5, 0.5, 0.5));
+		modelSala.render(matrixModelSala);
+		glActiveTexture(GL_TEXTURE0);
+
+		glm::mat4 matrixModelSalap = glm::mat4(1.0);
+		matrixModelSalap = glm::translate(matrixModelSalap, glm::vec3(-1.0, -1.5, 3.5));
+		matrixModelSalap = glm::rotate(matrixModelSalap, glm::radians(90.0f), glm::vec3(0, 1, 0));
+		matrixModelSalap = glm::scale(matrixModelSalap, glm::vec3(0.3, 0.3, 0.3));
+		modelSalap.render(matrixModelSalap);
+		glActiveTexture(GL_TEXTURE0);
+
+		glm::mat4 matrixModelToilet = glm::mat4(1.0);
+		matrixModelToilet = glm::translate(matrixModelToilet, glm::vec3(-0.2, -1.6, -1.0));
+		matrixModelToilet = glm::rotate(matrixModelToilet, glm::radians(-90.0f), glm::vec3(0, 1, 0));
+		matrixModelToilet = glm::scale(matrixModelToilet, glm::vec3(0.3, 0.3, 0.3));
+		modelToilet.render(matrixModelToilet);
+		glActiveTexture(GL_TEXTURE0);
+
+		glm::mat4 matrixModelHandWash = glm::mat4(1.0);
+		matrixModelHandWash = glm::translate(matrixModelHandWash, glm::vec3(-0.2, -1.6, -2.5));
+		matrixModelHandWash = glm::rotate(matrixModelHandWash, glm::radians(-90.0f), glm::vec3(0, 1, 0));
+		modelHandWash.render(matrixModelHandWash);
+		glActiveTexture(GL_TEXTURE0);
+
+		glm::mat4 matrixModelLamp = glm::mat4(1.0);
+		matrixModelLamp = glm::translate(matrixModelLamp, glm::vec3(-1.0, 1.3, -2.5));
+		matrixModelLamp = glm::rotate(matrixModelLamp, glm::radians(-90.0f), glm::vec3(0, 1, 0));
+		modelLampara.render(glm::scale(matrixModelLamp, glm::vec3(0.2, 0.2, 0.2)));
+		glActiveTexture(GL_TEXTURE0);
+
+		
+
+		/////////////////////////////////////////
+		/////////////Decoraciones////////////////
+		/////////////////////////////////////////
+		glm::mat4 matrixModelTree = glm::mat4(1.0);
+		matrixModelTree = glm::translate(matrixModelTree, glm::vec3(-4.1, 2.1, 5.0));
+		matrixModelTree = glm::scale(matrixModelTree, glm::vec3(0.6, 0.6, 0.6));
+		modelTree.render(matrixModelTree);
+
+		glm::mat4 matrixModelStar = glm::mat4(1.0);
+		matrixModelStar = glm::translate(matrixModelStar, glm::vec3(-4.1, 4.8, 5.0));
+		matrixModelStar = glm::scale(matrixModelStar, glm::vec3(0.15, 0.15, 0.15));
+		modelStar.render(matrixModelStar);
+
+		glm::mat4 matrixModelSerie = glm::mat4(1.0);
+		matrixModelSerie = glm::translate(matrixModelSerie, glm::vec3(-2.0, 4.5, 5.6));
+		modelSerie.render(glm::scale(matrixModelSerie, glm::vec3(0.15, 0.15, 0.15)));
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////RENDER ANIMACIONES/////////////////////////////////////////////////////
