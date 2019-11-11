@@ -1,0 +1,44 @@
+# Blender MTL File: 'None'
+# Material Count: 3
+
+newmtl chrome.001
+Ns 96.078443
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.0 0.0 0.0
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd dorado.jpg
+map_Ka dorado.jpg
+map_Ks dorado.jpg
+
+
+newmtl gold.000
+Ns 96.078443
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.0 0.0 0.0
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd dorado.jpg
+map_Ka dorado.jpg
+map_Ks dorado.jpg
+
+
+newmtl yellow_mate
+Ns 96.078443
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.0 0.0 0.0
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd silver.jpg
+map_Ka silver.jpg
+map_Ks silver.jpg
+

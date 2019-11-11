@@ -114,6 +114,11 @@ Model modelLamboBackWheels;
 Model modelTree;
 Model modelStar;
 Model modelSerie;
+Model modelChBall1;
+Model modelChBall2;
+Model modelChBall3;
+Model modelChBall4;
+Model modelChBall5;
 
 GLuint textureID1, textureID2, textureID3, textureID4, textureID5, textureID6, textureID7, textureID8, textureID9;
 GLuint textureID10, textureID11, textureID12, textureID13, textureID14, textureID15, textureID16, textureID17;
@@ -378,7 +383,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	/////////////////////
 	/////Muebles/////////
 	/////////////////////
-	modelMueble.loadModel("../models/Wood_Table/\Wood_Table.obj");
+	/*modelMueble.loadModel("../models/Wood_Table/\Wood_Table.obj");
 	modelMueble.setShader(&shaderMulLighting);
 
 	modelTable.loadModel("../models/table/table.obj");
@@ -396,8 +401,6 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	modelJardinera.loadModel("../models/jardinera/jardinera.obj");
 	modelJardinera.setShader(&shaderMulLighting);
 
-	modelLampara.loadModel("../models/lampara1/lampara.obj");
-	modelLampara.setShader(&shaderMulLighting);
 
 	modelSalap.loadModel("../models/sofap/sofap.obj");
 	modelSalap.setShader(&shaderMulLighting);
@@ -407,8 +410,10 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	modelToilet.setShader(&shaderMulLighting);
 
 	modelHandWash.loadModel("../models/lavamanos/bathroom_vanity.obj");
-	modelHandWash.setShader(&shaderMulLighting);
+	modelHandWash.setShader(&shaderMulLighting);*/
 
+	modelLampara.loadModel("../models/lampara1/lampara.obj");
+	modelLampara.setShader(&shaderMulLighting);
 
 	////////////////////////
 	/////Decoración/////////
@@ -422,7 +427,22 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	modelSerie.loadModel("../models/serie/jugando.obj");
 	modelSerie.setShader(&shaderMulLighting);
 
-	camera->setPosition(glm::vec3(5, 0.0, 4));
+	modelChBall1.loadModel("../models/Christmas_Bells_obj/ball1.obj");
+	modelChBall1.setShader(&shaderMulLighting);
+
+	modelChBall2.loadModel("../models/Christmas_Bells_obj/ball2.obj");
+	modelChBall2.setShader(&shaderMulLighting);
+
+	modelChBall3.loadModel("../models/Christmas_Bells_obj/ball3.obj");
+	modelChBall3.setShader(&shaderMulLighting);
+
+	modelChBall4.loadModel("../models/Christmas_Bells_obj/ball4.obj");
+	modelChBall4.setShader(&shaderMulLighting);
+
+	modelChBall5.loadModel("../models/Christmas_Bells_obj/ball5.obj");
+	modelChBall5.setShader(&shaderMulLighting);
+
+	camera->setPosition(glm::vec3(-4.5, 4.8, 10.0));
 
 	// Descomentar
 	// Definimos el tamanio de la imagen
@@ -812,7 +832,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Libera la memoria de la textura
 	texture12.freeImage(bitmap);
 
-	Texture texture13("../Textures/zaguan.jpg");
+	Texture texture13("../Textures/zaguan.png");
 	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
 	// Voltear la imagen
 	bitmap = texture13.loadImage(true);
@@ -844,7 +864,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Libera la memoria de la textura
 	texture13.freeImage(bitmap);
 
-	Texture texture14("../Textures/puerta_sala.jpg");
+	Texture texture14("../Textures/puerta_sala.png");
 	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
 	// Voltear la imagen
 	bitmap = texture14.loadImage(true);
@@ -876,7 +896,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Libera la memoria de la textura
 	texture14.freeImage(bitmap);
 
-	Texture texture15("../Textures/probando.jpg");
+	Texture texture15("../Textures/probando.png");
 	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
 	// Voltear la imagen
 	bitmap = texture15.loadImage(true);
@@ -908,7 +928,7 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 	// Libera la memoria de la textura
 	texture15.freeImage(bitmap);
 
-	Texture texture16("../Textures/ventanal_arriba.jpg");
+	Texture texture16("../Textures/ventanal_arriba.png");
 	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
 	// Voltear la imagen
 	bitmap = texture16.loadImage(true);
@@ -1100,6 +1120,38 @@ void init(int width, int height, std::string strTitle, bool bFullScreen) {
 		std::cout << "Failed to load texture" << std::endl;
 	// Libera la memoria de la textura
 	texture21.freeImage(bitmap);
+
+	Texture texture22("../Textures/piso_gris.jpg");
+	// Carga el mapa de bits (FIBITMAP es el tipo de dato de la libreria)
+	// Voltear la imagen
+	bitmap = texture22.loadImage(true);
+	// Convertimos el mapa de bits en un arreglo unidimensional de tipo unsigned char
+	data = texture22.convertToData(bitmap, imageWidth, imageHeight);
+	// Creando la textura con id 1
+	glGenTextures(1, &textureID22);
+	// Enlazar esa textura a una tipo de textura de 2D.
+	glBindTexture(GL_TEXTURE_2D, textureID22);
+	// set the texture wrapping parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // set texture wrapping to GL_REPEAT (default wrapping method)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// set texture filtering parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// Verifica si se pudo abrir la textura
+	if (data) {
+		// Transferis los datos de la imagen a memoria
+		// Tipo de textura, Mipmaps, Formato interno de openGL, ancho, alto, Mipmaps,
+		// Formato interno de la libreria de la imagen, el tipo de dato y al apuntador
+		// a los datos
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0,
+			GL_BGRA, GL_UNSIGNED_BYTE, data);
+		// Generan los niveles del mipmap (OpenGL es el ecargado de realizarlos)
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+		std::cout << "Failed to load texture" << std::endl;
+	// Libera la memoria de la textura
+	texture22.freeImage(bitmap);
 	// Carga de texturas para el skybox
 	Texture skyboxTexture = Texture("");
 	glGenTextures(1, &skyboxTextureID);
@@ -1190,6 +1242,12 @@ void destroy() {
 
 	modelTree.destroy();
 	modelStar.destroy();
+
+	modelChBall1.destroy();
+	modelChBall2.destroy();
+	modelChBall3.destroy();
+	modelChBall4.destroy();
+	modelChBall5.destroy();
 }
 
 void reshapeCallback(GLFWwindow* Window, int widthRes, int heightRes) {
@@ -1467,9 +1525,10 @@ void applicationLoop() {
 		shaderColorLighting.setVectorFloat3("light.ambient",
 			glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
 		shaderColorLighting.setVectorFloat3("light.diffuse",
-			glm::value_ptr(glm::vec3(0.3, 0.3, 0.3)));
+			glm::value_ptr(glm::vec3(0.4, 0.4, 0.4)));
 		shaderColorLighting.setVectorFloat3("light.specular",
-			glm::value_ptr(glm::vec3(0.9, 0.0, 0.0)));
+			glm::value_ptr(glm::vec3(0.7, 0.7, 0.7)));
+
 
 		// Propiedades de la luz para objetos con textura
 		shaderTextureLighting.setVectorFloat3("viewPos",
@@ -1507,7 +1566,7 @@ void applicationLoop() {
 		shaderMulLighting.setFloat("spotLights[0].quadratic", 0.001);
 
 		// Esto es para la luces pointlights
-		shaderMulLighting.setInt("pointLightCount", 6);
+		shaderMulLighting.setInt("pointLightCount", 14);
 		shaderMulLighting.setVectorFloat3("pointLights[0].position", glm::value_ptr((glm::vec3(-3.1, 1.8, 7.0))));
 		shaderMulLighting.setVectorFloat3("pointLights[0].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
 		shaderMulLighting.setVectorFloat3("pointLights[0].light.diffuse", glm::value_ptr(glm::vec3(0.0, 0.01, 0.0)));
@@ -1549,15 +1608,95 @@ void applicationLoop() {
 		shaderMulLighting.setFloat("pointLights[4].constant", 1.0);
 		shaderMulLighting.setFloat("pointLights[4].linear", offset5);
 		shaderMulLighting.setFloat("pointLights[4].quadratic", 0.004);
-		
+
 		//luz del baño
 		shaderMulLighting.setVectorFloat3("pointLights[5].position", glm::value_ptr((glm::vec3(-1.0, 1.3, -2.5))));
 		shaderMulLighting.setVectorFloat3("pointLights[5].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
 		shaderMulLighting.setVectorFloat3("pointLights[5].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.0)));
 		shaderMulLighting.setVectorFloat3("pointLights[5].light.specular", glm::value_ptr(glm::vec3(0.91, 0.92, 0.85)));
 		shaderMulLighting.setFloat("pointLights[5].constant", 1.0);
-		shaderMulLighting.setFloat("pointLights[5].linear", 0.001);
+		shaderMulLighting.setFloat("pointLights[5].linear", 0.1);
 		shaderMulLighting.setFloat("pointLights[5].quadratic", 0.004);
+
+		//luz comedor
+		shaderMulLighting.setVectorFloat3("pointLights[6].position", glm::value_ptr((glm::vec3(2.5, 1.12, -2.5))));
+		shaderMulLighting.setVectorFloat3("pointLights[6].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+		shaderMulLighting.setVectorFloat3("pointLights[6].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.0)));
+		shaderMulLighting.setVectorFloat3("pointLights[6].light.specular", glm::value_ptr(glm::vec3(0.91, 0.92, 0.85)));
+		shaderMulLighting.setFloat("pointLights[6].constant", 1.0);
+		shaderMulLighting.setFloat("pointLights[6].linear", 0.1);
+		shaderMulLighting.setFloat("pointLights[6].quadratic", 0.004);
+
+
+		//luz cocina
+		shaderMulLighting.setVectorFloat3("pointLights[7].position", glm::value_ptr((glm::vec3(6.0, 1.12, -2.5))));
+		shaderMulLighting.setVectorFloat3("pointLights[7].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+		shaderMulLighting.setVectorFloat3("pointLights[7].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.0)));
+		shaderMulLighting.setVectorFloat3("pointLights[7].light.specular", glm::value_ptr(glm::vec3(0.91, 0.92, 0.85)));
+		shaderMulLighting.setFloat("pointLights[7].constant", 1.0);
+		shaderMulLighting.setFloat("pointLights[7].linear", 0.1);
+		shaderMulLighting.setFloat("pointLights[7].quadratic", 0.004);
+
+		//luces sala
+		shaderMulLighting.setVectorFloat3("pointLights[8].position", glm::value_ptr((glm::vec3(0.0, 1.0, 3.0))));
+		shaderMulLighting.setVectorFloat3("pointLights[8].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+		shaderMulLighting.setVectorFloat3("pointLights[8].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.0)));
+		shaderMulLighting.setVectorFloat3("pointLights[8].light.specular", glm::value_ptr(glm::vec3(0.91, 0.92, 0.85)));
+		shaderMulLighting.setFloat("pointLights[8].constant", 1.0);
+		shaderMulLighting.setFloat("pointLights[8].linear", 0.1);
+		shaderMulLighting.setFloat("pointLights[8].quadratic", 0.004);
+
+		shaderMulLighting.setVectorFloat3("pointLights[9].position", glm::value_ptr((glm::vec3(2.0, 1.0, 3.0))));
+		shaderMulLighting.setVectorFloat3("pointLights[9].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+		shaderMulLighting.setVectorFloat3("pointLights[9].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.0)));
+		shaderMulLighting.setVectorFloat3("pointLights[9].light.specular", glm::value_ptr(glm::vec3(0.91, 0.92, 0.85)));
+		shaderMulLighting.setFloat("pointLights[9].constant", 1.0);
+		shaderMulLighting.setFloat("pointLights[9].linear", 0.1);
+		shaderMulLighting.setFloat("pointLights[9].quadratic", 0.004);
+
+		//luz recamara abajo
+		shaderMulLighting.setVectorFloat3("pointLights[10].position", glm::value_ptr((glm::vec3(7.5, 1.0, 4.0))));
+		shaderMulLighting.setVectorFloat3("pointLights[10].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+		shaderMulLighting.setVectorFloat3("pointLights[10].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.0)));
+		shaderMulLighting.setVectorFloat3("pointLights[10].light.specular", glm::value_ptr(glm::vec3(0.91, 0.92, 0.85)));
+		shaderMulLighting.setFloat("pointLights[10].constant", 1.0);
+		shaderMulLighting.setFloat("pointLights[10].linear", 0.1);
+		shaderMulLighting.setFloat("pointLights[10].quadratic", 0.004);
+
+		//luz recamara 1
+		shaderMulLighting.setVectorFloat3("pointLights[11].position", glm::value_ptr((glm::vec3(7.5, 4.65, 4.0))));
+		shaderMulLighting.setVectorFloat3("pointLights[11].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+		shaderMulLighting.setVectorFloat3("pointLights[11].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.0)));
+		shaderMulLighting.setVectorFloat3("pointLights[11].light.specular", glm::value_ptr(glm::vec3(0.91, 0.92, 0.85)));
+		shaderMulLighting.setFloat("pointLights[11].constant", 1.0);
+		shaderMulLighting.setFloat("pointLights[11].linear", 0.1);
+		shaderMulLighting.setFloat("pointLights[11].quadratic", 0.004);
+
+		//luz recamara 2
+		shaderMulLighting.setVectorFloat3("pointLights[12].position", glm::value_ptr((glm::vec3(7.5, 4.65, -2.5))));
+		shaderMulLighting.setVectorFloat3("pointLights[12].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+		shaderMulLighting.setVectorFloat3("pointLights[12].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.0)));
+		shaderMulLighting.setVectorFloat3("pointLights[12].light.specular", glm::value_ptr(glm::vec3(0.91, 0.92, 0.85)));
+		shaderMulLighting.setFloat("pointLights[12].constant", 1.0);
+		shaderMulLighting.setFloat("pointLights[12].linear", 0.1);
+		shaderMulLighting.setFloat("pointLights[12].quadratic", 0.004);
+
+		//luz estrella
+		shaderMulLighting.setVectorFloat3("pointLights[13].position", glm::value_ptr((glm::vec3(-4.1, 4.5, 5.0))));
+		shaderMulLighting.setVectorFloat3("pointLights[13].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+		shaderMulLighting.setVectorFloat3("pointLights[13].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.0)));
+		shaderMulLighting.setVectorFloat3("pointLights[13].light.specular", glm::value_ptr(glm::vec3(0.91, 0.92, 0.85)));
+		shaderMulLighting.setFloat("pointLights[13].constant", 1.0);
+		shaderMulLighting.setFloat("pointLights[13].linear", offset1);
+		shaderMulLighting.setFloat("pointLights[13].quadratic", 0.004);
+
+		shaderMulLighting.setVectorFloat3("pointLights[14].position", glm::value_ptr((glm::vec3(-4.1, 2.8, 5.0))));
+		shaderMulLighting.setVectorFloat3("pointLights[14].light.ambient", glm::value_ptr(glm::vec3(0.001, 0.001, 0.001)));
+		shaderMulLighting.setVectorFloat3("pointLights[14].light.diffuse", glm::value_ptr(glm::vec3(0.01, 0.01, 0.0)));
+		shaderMulLighting.setVectorFloat3("pointLights[14].light.specular", glm::value_ptr(glm::vec3(0.91, 0.92, 0.85)));
+		shaderMulLighting.setFloat("pointLights[14].constant", 1.0);
+		shaderMulLighting.setFloat("pointLights[14].linear", offset2);
+		shaderMulLighting.setFloat("pointLights[14].quadratic", 0.004);
 
 		sphereLamp.setScale(glm::vec3(0.1, 0.1, 0.2));
 		sphereLamp.setPosition(glm::vec3(-3.1, 1.8, 6.0));
@@ -2107,15 +2246,17 @@ void applicationLoop() {
 		pisocochera = glm::translate(pisocochera, glm::vec3(-4.1, -1.5, -0.2));
 		boxParedes.render(glm::scale(pisocochera, glm::vec3(3.4, 0.1, 12)));
 
-		glBindTexture(GL_TEXTURE_2D, textureID10);
+		glBindTexture(GL_TEXTURE_2D, textureID22);
+
 		glm::mat4 pisopb = glm::mat4(1.0);
 		pisopb = glm::translate(pisopb, glm::vec3(4.0, -1.5, -0.2));
-		shaderMaterialLighting.setVectorFloat3("material.ambient", glm::value_ptr(glm::vec3(0.25f, 0.20725f, 0.20725f)));
-		shaderMaterialLighting.setVectorFloat3("material.diffuse", glm::value_ptr(glm::vec3(1.0f, 0.829f, 0.829f)));
-		shaderMaterialLighting.setVectorFloat3("material.specular", glm::value_ptr(glm::vec3({ 0.296648f, 0.296648f, 0.296648f })));
-		shaderMaterialLighting.setFloat("material.shininess", 0.922f);
-		boxMaterials.render(glm::scale(pisopb, glm::vec3(13, 0.1, 12)));
+		shaderMaterialLighting.setVectorFloat3("material.ambient", glm::value_ptr(glm::vec3(0.61424f, 0.04136f, 0.04136f)));
+		shaderMaterialLighting.setVectorFloat3("material.diffuse", glm::value_ptr(glm::vec3(0.61424f, 0.04136f, 0.04136f)));
+		shaderMaterialLighting.setVectorFloat3("material.specular", glm::value_ptr(glm::vec3(0.727811f, 0.626959f, 0.626959f)));
+		shaderMaterialLighting.setFloat("material.shininess", 76.8f);
+		boxParedes.render(glm::scale(pisopb, glm::vec3(13, 0.1, 12)));
 
+		glBindTexture(GL_TEXTURE_2D, textureID10);
 		/////TECHO PLANTA BAJA
 		glm::mat4 techopb = glm::mat4(1.0);
 		techopb = glm::translate(techopb, glm::vec3(2.25, 1.8, 0.0));
@@ -2359,7 +2500,7 @@ void applicationLoop() {
 		glm::mat4 paredfachada2 = glm::mat4(1.0);
 		paredfachada2 = glm::translate(paredfachada2, glm::vec3(0.95, 2.6, 6.1));
 		glBindTexture(GL_TEXTURE_2D, textureID20);
-		boxParedes.render(0,12, glm::scale(paredfachada2, glm::vec3(2.5, 1.0, 0.3)));
+		boxParedes.render(0, 12, glm::scale(paredfachada2, glm::vec3(2.5, 1.0, 0.3)));
 		boxParedes.render(30, 6, glm::scale(paredfachada2, glm::vec3(2.5, 1.0, 0.3)));
 		glBindTexture(GL_TEXTURE_2D, textureID10);
 		boxParedes.render(6, 24, glm::scale(paredfachada2, glm::vec3(2.5, 1.0, 0.3)));
@@ -2372,7 +2513,7 @@ void applicationLoop() {
 		boxParedes.render(30, 6, glm::scale(paredfachada3, glm::vec3(2.25, 3.0, 0.3)));
 		glBindTexture(GL_TEXTURE_2D, textureID10);
 		boxParedes.render(6, 24, glm::scale(paredfachada3, glm::vec3(2.25, 3.0, 0.3))); //vemos
-		
+
 		glBindTexture(GL_TEXTURE_2D, textureID20);
 		glm::mat4 paredfachada4 = glm::mat4(1.0);
 		paredfachada4 = glm::translate(paredfachada4, glm::vec3(1.1, 5.2, 6.1));
@@ -2412,7 +2553,7 @@ void applicationLoop() {
 		///////////////////////////////////////////
 		/////////////MUEBLES/////////////////////
 		///////////////////////////////////////////
-		glm::mat4 matrixModelMueble = glm::mat4(1.0);
+		/*glm::mat4 matrixModelMueble = glm::mat4(1.0);
 		matrixModelMueble = glm::translate(matrixModelMueble, glm::vec3(1.0, -1.6, 3.0));
 		matrixModelMueble = glm::scale(matrixModelMueble, glm::vec3(1.5, 1.5, 1.5));
 		modelMueble.render(matrixModelMueble);
@@ -2469,14 +2610,64 @@ void applicationLoop() {
 		matrixModelHandWash = glm::translate(matrixModelHandWash, glm::vec3(-0.2, -1.6, -2.5));
 		matrixModelHandWash = glm::rotate(matrixModelHandWash, glm::radians(-90.0f), glm::vec3(0, 1, 0));
 		modelHandWash.render(matrixModelHandWash);
+		glActiveTexture(GL_TEXTURE0);*/
+
+		//lampara del baño
+		glm::mat4 matrixModelLamp1 = glm::mat4(1.0);
+		matrixModelLamp1 = glm::translate(matrixModelLamp1, glm::vec3(-1.0, 1.12, -2.5));
+		matrixModelLamp1 = glm::rotate(matrixModelLamp1, glm::radians(-90.0f), glm::vec3(0, 1, 0));
+		modelLampara.render(glm::scale(matrixModelLamp1, glm::vec3(0.2, 0.2, 0.2)));
 		glActiveTexture(GL_TEXTURE0);
 
-		glm::mat4 matrixModelLamp = glm::mat4(1.0);
-		matrixModelLamp = glm::translate(matrixModelLamp, glm::vec3(-1.0, 1.3, -2.5));
-		matrixModelLamp = glm::rotate(matrixModelLamp, glm::radians(-90.0f), glm::vec3(0, 1, 0));
-		modelLampara.render(glm::scale(matrixModelLamp, glm::vec3(0.2, 0.2, 0.2)));
+		//lampara comedor
+		glm::mat4 matrixModelLamp2 = glm::mat4(1.0);
+		matrixModelLamp2 = glm::translate(matrixModelLamp2, glm::vec3(2.5, 1.12, -2.5));
+		matrixModelLamp2 = glm::rotate(matrixModelLamp2, glm::radians(-90.0f), glm::vec3(0, 1, 0));
+		modelLampara.render(glm::scale(matrixModelLamp2, glm::vec3(0.2, 0.2, 0.2)));
 		glActiveTexture(GL_TEXTURE0);
 
+		//lampara cocina
+		glm::mat4 matrixModelLamp3 = glm::mat4(1.0);
+		matrixModelLamp3 = glm::translate(matrixModelLamp3, glm::vec3(6.0, 1.12, -2.5));
+		matrixModelLamp3 = glm::rotate(matrixModelLamp3, glm::radians(-90.0f), glm::vec3(0, 1, 0));
+		modelLampara.render(glm::scale(matrixModelLamp3, glm::vec3(0.2, 0.2, 0.2)));
+		glActiveTexture(GL_TEXTURE0);
+
+
+		//lampara sala 1
+		glm::mat4 matrixModelLamp4 = glm::mat4(1.0);
+		matrixModelLamp4 = glm::translate(matrixModelLamp4, glm::vec3(0.0, 1.0, 3.0));
+		matrixModelLamp4 = glm::rotate(matrixModelLamp4, glm::radians(-90.0f), glm::vec3(0, 1, 0));
+		modelLampara.render(glm::scale(matrixModelLamp4, glm::vec3(0.2, 0.2, 0.2)));
+		glActiveTexture(GL_TEXTURE0);
+		
+		//lampara sala 2
+		glm::mat4 matrixModelLamp5 = glm::mat4(1.0);
+		matrixModelLamp5 = glm::translate(matrixModelLamp5, glm::vec3(2.0, 1.0, 3.0));
+		matrixModelLamp5 = glm::rotate(matrixModelLamp5, glm::radians(-90.0f), glm::vec3(0, 1, 0));
+		modelLampara.render(glm::scale(matrixModelLamp5, glm::vec3(0.2, 0.2, 0.2)));
+		glActiveTexture(GL_TEXTURE0);
+
+		//lampara recamara abajo
+		glm::mat4 matrixModelLamp6 = glm::mat4(1.0);
+		matrixModelLamp6 = glm::translate(matrixModelLamp6, glm::vec3(7.5, 1.0, 4.0));
+		matrixModelLamp6 = glm::rotate(matrixModelLamp6, glm::radians(-90.0f), glm::vec3(0, 1, 0));
+		modelLampara.render(glm::scale(matrixModelLamp6, glm::vec3(0.2, 0.2, 0.2)));
+		glActiveTexture(GL_TEXTURE0);
+
+		//lampara recamara arriba
+		glm::mat4 matrixModelLamp7 = glm::mat4(1.0);
+		matrixModelLamp7 = glm::translate(matrixModelLamp7, glm::vec3(7.5, 4.65, 4.0));
+		matrixModelLamp7 = glm::rotate(matrixModelLamp7, glm::radians(-90.0f), glm::vec3(0, 1, 0));
+		modelLampara.render(glm::scale(matrixModelLamp7, glm::vec3(0.2, 0.2, 0.2)));
+		glActiveTexture(GL_TEXTURE0);
+
+		//recamara arriba2
+		glm::mat4 matrixModelLamp8 = glm::mat4(1.0);
+		matrixModelLamp8 = glm::translate(matrixModelLamp8, glm::vec3(7.5, 4.65, -2.5));
+		matrixModelLamp8 = glm::rotate(matrixModelLamp8, glm::radians(-90.0f), glm::vec3(0, 1, 0));
+		modelLampara.render(glm::scale(matrixModelLamp8, glm::vec3(0.2, 0.2, 0.2)));
+		glActiveTexture(GL_TEXTURE0);
 		
 
 		/////////////////////////////////////////
@@ -2496,6 +2687,141 @@ void applicationLoop() {
 		matrixModelSerie = glm::translate(matrixModelSerie, glm::vec3(-2.0, 4.5, 5.6));
 		modelSerie.render(glm::scale(matrixModelSerie, glm::vec3(0.15, 0.15, 0.15)));
 
+		glm::mat4 matrixModelChBall1 = glm::mat4(1.0);
+		matrixModelChBall1 = glm::translate(matrixModelChBall1, glm::vec3(-4.0, 4.4, 4.8));
+		modelChBall1.render(glm::scale(matrixModelChBall1, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall2 = glm::mat4(1.0);
+		matrixModelChBall2 = glm::translate(matrixModelChBall2, glm::vec3(-4.3, 4.4, 4.9));
+		modelChBall2.render(glm::scale(matrixModelChBall2, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall3 = glm::mat4(1.0);
+		matrixModelChBall3 = glm::translate(matrixModelChBall3, glm::vec3(-4.3, 4.0, 4.8));
+		modelChBall3.render(glm::scale(matrixModelChBall3, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall4 = glm::mat4(1.0);
+		matrixModelChBall4 = glm::translate(matrixModelChBall4, glm::vec3(-4.0, 4.0, 4.7));
+		modelChBall5.render(glm::scale(matrixModelChBall4, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall5 = glm::mat4(1.0);
+		matrixModelChBall5 = glm::translate(matrixModelChBall5, glm::vec3(-3.8, 4.0, 5.0));
+		modelChBall4.render(glm::scale(matrixModelChBall5, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall6 = glm::mat4(1.0);
+		matrixModelChBall6 = glm::translate(matrixModelChBall6, glm::vec3(-4.3, 4.0, 5.1));
+		modelChBall1.render(glm::scale(matrixModelChBall6, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall7 = glm::mat4(1.0);
+		matrixModelChBall7 = glm::translate(matrixModelChBall7, glm::vec3(-4.0, 4.0, 5.1));
+		modelChBall2.render(glm::scale(matrixModelChBall7, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall8 = glm::mat4(1.0);
+		matrixModelChBall8 = glm::translate(matrixModelChBall8, glm::vec3(-3.8, 3.6, 5.1));
+		modelChBall3.render(glm::scale(matrixModelChBall8, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall9 = glm::mat4(1.0);
+		matrixModelChBall9 = glm::translate(matrixModelChBall9, glm::vec3(-4.1, 3.6, 5.2));
+		modelChBall1.render(glm::scale(matrixModelChBall9, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall10 = glm::mat4(1.0);
+		matrixModelChBall10 = glm::translate(matrixModelChBall10, glm::vec3(-4.4, 3.6, 5.3));
+		modelChBall4.render(glm::scale(matrixModelChBall10, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall11 = glm::mat4(1.0);
+		matrixModelChBall11 = glm::translate(matrixModelChBall11, glm::vec3(-3.8, 3.6, 4.7));
+		modelChBall2.render(glm::scale(matrixModelChBall11, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall12 = glm::mat4(1.0);
+		matrixModelChBall12 = glm::translate(matrixModelChBall12, glm::vec3(-4.1, 3.6, 4.6));
+		modelChBall4.render(glm::scale(matrixModelChBall12, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall13 = glm::mat4(1.0);
+		matrixModelChBall13 = glm::translate(matrixModelChBall13, glm::vec3(-4.4, 3.6, 4.7));
+		modelChBall5.render(glm::scale(matrixModelChBall13, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall14 = glm::mat4(1.0);
+		matrixModelChBall14 = glm::translate(matrixModelChBall14, glm::vec3(-3.7, 3.2, 5.3));
+		modelChBall2.render(glm::scale(matrixModelChBall14, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall15 = glm::mat4(1.0);
+		matrixModelChBall15 = glm::translate(matrixModelChBall15, glm::vec3(-4.1, 3.2, 5.4));
+		modelChBall1.render(glm::scale(matrixModelChBall15, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall16 = glm::mat4(1.0);
+		matrixModelChBall16 = glm::translate(matrixModelChBall16, glm::vec3(-4.5, 3.2, 5.4));
+		modelChBall5.render(glm::scale(matrixModelChBall16, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall17 = glm::mat4(1.0);
+		matrixModelChBall17 = glm::translate(matrixModelChBall17, glm::vec3(-3.7, 3.2, 4.5));
+		modelChBall4.render(glm::scale(matrixModelChBall17, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall18 = glm::mat4(1.0);
+		matrixModelChBall18 = glm::translate(matrixModelChBall18, glm::vec3(-4.1, 3.2, 4.4));
+		modelChBall3.render(glm::scale(matrixModelChBall18, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall19 = glm::mat4(1.0);
+		matrixModelChBall19 = glm::translate(matrixModelChBall19, glm::vec3(-4.5, 3.2, 4.5));
+		modelChBall2.render(glm::scale(matrixModelChBall19, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall20 = glm::mat4(1.0);
+		matrixModelChBall20 = glm::translate(matrixModelChBall20, glm::vec3(-3.7, 2.8, 5.4));
+		modelChBall4.render(glm::scale(matrixModelChBall20, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall26 = glm::mat4(1.0);
+		matrixModelChBall26 = glm::translate(matrixModelChBall26, glm::vec3(-3.5, 2.8, 5.0));
+		modelChBall3.render(glm::scale(matrixModelChBall26, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall27 = glm::mat4(1.0);
+		matrixModelChBall27 = glm::translate(matrixModelChBall27, glm::vec3(-3.6, 3.2, 4.8));
+		modelChBall5.render(glm::scale(matrixModelChBall27, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall28 = glm::mat4(1.0);
+		matrixModelChBall28 = glm::translate(matrixModelChBall28, glm::vec3(-3.5, 2.4, 5.0));
+		modelChBall1.render(glm::scale(matrixModelChBall28, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall21 = glm::mat4(1.0);
+		matrixModelChBall21 = glm::translate(matrixModelChBall21, glm::vec3(-4.1, 2.8, 5.6));
+		modelChBall2.render(glm::scale(matrixModelChBall21, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall22 = glm::mat4(1.0);
+		matrixModelChBall22 = glm::translate(matrixModelChBall22, glm::vec3(-4.5, 2.8, 5.4));
+		modelChBall1.render(glm::scale(matrixModelChBall22, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall23 = glm::mat4(1.0);
+		matrixModelChBall23 = glm::translate(matrixModelChBall23, glm::vec3(-3.7, 2.8, 4.5));
+		modelChBall1.render(glm::scale(matrixModelChBall23, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall24 = glm::mat4(1.0);
+		matrixModelChBall24 = glm::translate(matrixModelChBall24, glm::vec3(-4.1, 2.8, 4.4));
+		modelChBall5.render(glm::scale(matrixModelChBall24, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall25 = glm::mat4(1.0);
+		matrixModelChBall25 = glm::translate(matrixModelChBall25, glm::vec3(-4.5, 2.8, 4.5));
+		modelChBall3.render(glm::scale(matrixModelChBall25, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall29 = glm::mat4(1.0);
+		matrixModelChBall29 = glm::translate(matrixModelChBall29, glm::vec3(-3.7, 2.4, 5.3));
+		modelChBall2.render(glm::scale(matrixModelChBall29, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall30 = glm::mat4(1.0);
+		matrixModelChBall30 = glm::translate(matrixModelChBall30, glm::vec3(-4.1, 2.4, 5.4));
+		modelChBall1.render(glm::scale(matrixModelChBall30, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall31 = glm::mat4(1.0);
+		matrixModelChBall31 = glm::translate(matrixModelChBall31, glm::vec3(-4.5, 2.4, 5.4));
+		modelChBall5.render(glm::scale(matrixModelChBall31, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall32 = glm::mat4(1.0);
+		matrixModelChBall32 = glm::translate(matrixModelChBall32, glm::vec3(-3.7, 2.4, 4.5));
+		modelChBall4.render(glm::scale(matrixModelChBall32, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall33 = glm::mat4(1.0);
+		matrixModelChBall33 = glm::translate(matrixModelChBall33, glm::vec3(-4.1, 2.4, 4.4));
+		modelChBall3.render(glm::scale(matrixModelChBall33, glm::vec3(0.5, 0.5, 0.5)));
+
+		glm::mat4 matrixModelChBall34 = glm::mat4(1.0);
+		matrixModelChBall34 = glm::translate(matrixModelChBall34, glm::vec3(-4.5, 2.4, 4.5));
+		modelChBall2.render(glm::scale(matrixModelChBall34, glm::vec3(0.5, 0.5, 0.5)));
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////RENDER ANIMACIONES/////////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

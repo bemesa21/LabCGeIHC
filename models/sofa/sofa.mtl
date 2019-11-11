@@ -11,6 +11,8 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd piel.jpg
+map_Ka piel.jpg
+map_Ks piel.jpg
 
 newmtl wire_028089177
 Ns 31.999996
@@ -22,6 +24,8 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd piel.jpg
+map_Ka piel.jpg
+map_Ks piel.jpg
 
 newmtl wire_087224198
 Ns 31.999996
@@ -33,6 +37,8 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd piel.jpg
+map_Ka piel.jpg
+map_Ks piel.jpg
 
 newmtl wire_134006006
 Ns 31.999996
@@ -44,6 +50,8 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd piel.jpg
+map_Ka piel.jpg
+map_Ks piel.jpg
 
 newmtl wire_134110008
 Ns 31.999996
@@ -55,6 +63,8 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd piel.jpg
+map_Ka piel.jpg
+map_Ks piel.jpg
 
 newmtl wire_143224087
 Ns 31.999996
@@ -66,6 +76,8 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd piel.jpg
+map_Ka piel.jpg
+map_Ks piel.jpg
 
 newmtl wire_177028149
 Ns 31.999996
@@ -77,6 +89,8 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd piel.jpg
+map_Ka piel.jpg
+map_Ks piel.jpg
 
 newmtl wire_224086086
 Ns 31.999996
@@ -88,6 +102,8 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd piel.jpg
+map_Ka piel.jpg
+map_Ks piel.jpg
 
 newmtl wire_224198087
 Ns 31.999996
@@ -99,6 +115,8 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd piel.jpg
+map_Ka piel.jpg
+map_Ks piel.jpg
 
 newmtl wire_229166215
 Ns 31.999996
@@ -110,3 +128,5 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd piel.jpg
+map_Ka piel.jpg
+map_Ks piel.jpg

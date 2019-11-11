@@ -11,6 +11,8 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd itrees-02_bark-appleold-02.jpg
+map_Ka itrees-02_bark-appleold-02.jpg
+map_Ks itrees-02_bark-appleold-02.jpg
 
 newmtl archmodels58_020_2
 Ns 179.999996
@@ -22,3 +24,5 @@ Ni 1.000000
 d 1.000000
 illum 2
 map_Kd cgaxis_tree_18_02.png
+map_Ka cgaxis_tree_18_02.png
+map_Ks cgaxis_tree_18_02.png
