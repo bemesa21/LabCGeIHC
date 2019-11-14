@@ -1,0 +1,26 @@
+# Blender MTL File: 'None'
+# Material Count: 2
+
+newmtl 12169_Wreath
+Ns 12.999995
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.151800 0.151800 0.151800
+Ke 0.0 0.0 0.0
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd 12169_Wreath_diffuse.jpg
+map_Ks 12169_Wreath_specular.jpg
+
+newmtl 12169_Wreath_balls
+Ns 56.999988
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.774000 0.774000 0.774000
+Ke 0.0 0.0 0.0
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd 12169_Wreath_diffuse.jpg
+map_Ks 12169_Wreath_specular.jpg
